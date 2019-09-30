@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'courier';
+    src: url('resources/fonts/Courier New/Courier New.woff2') format('woff2'),
+         url('resources/fonts/Courier New/Courier New.woff') format('woff'),
+         url('resources/fonts/Courier New/Courier New.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'courier_bold';
+    src: url('resources/fonts/Courier New Bold/Courier New Bold.woff2') format('woff2'),
+         url('resources/fonts/Courier New Bold/Courier New Bold.woff') format('woff'),
+         url('resources/fonts/Courier New Bold/Courier New Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  letter-spacing: .1em;
+  text-align: center;
+  font-family: 'courier_bold', courier;
+}
+
+img {
+  padding: 0;
+  display: block;
+  margin: 0 auto;
+  max-height: 100%;
+  max-width: 30%;
+}
+
+hr{
+  border: 20px solid #009193;
+
+}
+
+a:link{
+  color:black;
+}
+
+a:visited{
+  color:black;
+}
+
+
+
+a:hover{
+  color: #009193;
+}
+
+
+h3{
+  color: #009193;
+}
+
+h1,h3{background: black; color:white; font-weight: normal}
+
+
+td, th {
+  border: 1px solid rgb(190,190,190);
+  padding: 10px 20px;
+}
+
+textarea{width: 80%; font-family: courier; font-weight: bold;}
+.ti{width: 80%}
+table{border-collapse: collapse; border: 1px solid black; width:100%}
