@@ -3,19 +3,19 @@
 <link rel='stylesheet' type='text/css' href='stylesheet.css'>
 </head>
 
-<a href = "index.html"> <img src = "resources/images/abacus_logo.png", width = "150px"></img></a>
+<a href = "index.html"> <img src = "resources/images/abacus_logo.png", width = 30%></img></a>
 
 <div style = "background: #EEE">
 
 
 
 <h3>
-  MAKE BALLOTS (DEMO)
+  MAKE BALLOTS
 </h3>
 
 
-<p>Print single-decision ballots<br>
-for a small group of voters.&nbsp<br>
+<p>Print single-decision ballots <br>
+for a group of voters.&nbsp<br>
 </p>
 
 
@@ -35,8 +35,8 @@ for a small group of voters.&nbsp<br>
 
 <h3 class = 'question'>CANDIDATES</h3>
 
-<p>Enter the options, separated by lines.</p>
-<p>(Leave blank to make write-in.)</p>
+<p>Enter the options, <br>separated by lines.</p>
+<p>(Leave a blank line<br>for a write-in row.)</p>
 <textarea id = 'candidates' rows = 10;></textarea>
 
 
@@ -46,7 +46,7 @@ for a small group of voters.&nbsp<br>
 <br>(maximum 3 characters per header)</p>
 
 <input id='columns' value = '0 1 2 3 4' class = 'ti' style = "text-align:center">
-<p>Copy/paste from the table below <br>to implement a voting method.</p>
+<p>Copy/paste from the input column <br>to implement a particular method.</p>
 <table>
     <tr>
       <th>Method</th>
@@ -72,11 +72,10 @@ for a small group of voters.&nbsp<br>
 
 
 
-<h3 class = 'question'>RANDOMIZE?</h3>
-
+<h3 class = 'question'>RANDOMIZE</h3>
+<p>Print candidates in a random order?</p>
 <input type='checkbox' id='rando' unchecked>
-Print candidates in a random order.
-
+yes
 
 
 <h3 class = 'question'>NUMBER OF BALLOTS</h3>
@@ -87,17 +86,17 @@ Print candidates in a random order.
 
 <h3 class = 'question'>PRINT</h3>
 
-<p>Download coded ballots.</p>
+<p>Download the coded ballots <br> and the database of codes.</p>
 
-<h2><button style = 'border-radius: 10px' onclick = 'print_ballot()'>
-&nbsp .pdf &nbsp
-</button></h2>
+<button style = 'border-radius: 10px' onclick = 'print_ballot()'>
+ ⤋ ballot.pdf
+</button>
 
 <h3>&nbsp</h3>
 
 </div>
 
-<a href = "index.html"> <img src = "resources/images/abacus_logo.png", width = "150px"></img></a>
+<a href = "index.html"> <img src = "resources/images/abacus_logo.png", width = 30%></img></a>
 </html>
 
 
@@ -122,6 +121,7 @@ document.getElementById('instructions').value =
       var instructions = document.getElementById('instructions').value;
       var n_ballots = document.getElementById('n_ballots').value;
       var rando = document.getElementById('rando').checked;
+      var copyright = "© 2020 Abacus Voting"
 
       var ballot_codes = make_codes(n_ballots, 20);
       var ownership_codes = make_codes(n_ballots, 20);
@@ -136,7 +136,7 @@ document.getElementById('instructions').value =
       var start_vert = 2;
 
       //var candidates_per_page = 10;
-      //var code_pairs_per_page = 25;
+      var code_pairs_per_page = 25;
 
       var doc = new jsPDF({
         orientation: 'p',
@@ -150,8 +150,7 @@ document.getElementById('instructions').value =
       candidate_array = ['','','','','','','','','','']};
 
       doc.setFont( 'courier' );
-      doc.setFontSize( 24 );
-
+      doc.setFontSize(24);
       doc.text(pw/2, ph/2, 'BLANK ON PURPOSE', align = 'center');
       doc.addPage();
       doc.setFontSize(24);
@@ -165,6 +164,8 @@ document.getElementById('instructions').value =
         if (instructions.length > 0){
 
         doc.addPage();
+        doc.setFontSize(8);
+        doc.text(pw/2,10.75, copyright, align = 'center');
         doc.setFontSize(24);
         doc.text(pw/2, 1, 'INSTRUCTIONS', align = 'center');
         doc.setFontSize(16);
@@ -173,6 +174,12 @@ document.getElementById('instructions').value =
 
         doc.setLineWidth(.02);
         doc.line(1, 7.33, 7.5, 7.33);
+        //var code_pages = ballot_codes.length / codes_pairs_per_page;
+      //  var code_page_remainder = ballot_codes.length % code_pairs_per_page;
+      //  for (var i = 0; i < code_pages; i++){
+        //  doc.addPage();
+        //  doc.text(pw/2,4,i,align='center');
+        //}
         doc.text(pw/2, 8, 'BALLOT CODE:', align = 'center');
         doc.text(pw/2, 8.5, ballot_codes[i], align = 'center');
         doc.text(pw/2, 9.5, 'OWNERSHIP CODE:', align = 'center');
@@ -180,8 +187,12 @@ document.getElementById('instructions').value =
 
       }
         doc.addPage();
+        doc.setFontSize(8);
+        doc.text(pw/2,10.75, copyright, align = 'center');
         doc.setFontSize(24);
         doc.text(pw/2, 1, decision_name, align = 'center');
+
+
 
         for (k = 0; k < column_array.length; k++){
           doc.setFontSize(12);
@@ -218,7 +229,6 @@ document.getElementById('instructions').value =
         doc.setLineWidth(.02);
         doc.setFontSize(12);
         doc.text(pw/2, 9.72, ballot_codes[i], align = 'center');
-        doc.roundedRect(2.25, 9.4, 4, .5, .1, .1);
 
       }
 
