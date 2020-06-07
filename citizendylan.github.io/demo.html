@@ -3,7 +3,7 @@
 <link rel='stylesheet' type='text/css' href='stylesheet.css'>
 </head>
 
-<a href = "index.html"> <img src = "resources/images/abacus_logo.png", width = 30%></img></a>
+<a href = "index.html"> <img src = "resources/images/abacus_logo.png", width = 20%></img></a>
 
 <div style = "background: #EEE">
 
@@ -17,8 +17,6 @@
 <p>Print single-decision ballots <br>
 for a group of voters.&nbsp<br>
 </p>
-
-
 
 
 
@@ -96,7 +94,7 @@ yes
 
 </div>
 
-<a href = "index.html"> <img src = "resources/images/abacus_logo.png", width = 30%></img></a>
+<a href = "index.html"> <img src = "resources/images/abacus_logo.png", width = 20%></img></a>
 </html>
 
 
@@ -123,12 +121,12 @@ document.getElementById('instructions').value =
       var rando = document.getElementById('rando').checked;
       var copyright = "© 2020 Abacus Voting"
 
-      var ballot_codes = make_codes(n_ballots, 20);
-      var ownership_codes = make_codes(n_ballots, 20);
+      var ballot_codes = make_codes(n_ballots, 16);
+      var ownership_codes = make_codes(n_ballots, 16);
 
       var pw = 8.5;
       var ph = 11;
-      var row_height = .675;
+      var row_height = .4;
       var col_width = .4;
       var margin = 1;
       var circle_size_ext = .1;
@@ -155,7 +153,7 @@ document.getElementById('instructions').value =
       doc.addPage();
       doc.setFontSize(24);
       doc.text(pw/2, 1, 'PAIRED CODES(1/1)', align = 'center');
-      doc.setFontSize(16);
+      doc.setFontSize(12);
       doc.text(1, 2, ownership_codes);
       doc.text(pw/2, 2, ballot_codes);
 
@@ -173,12 +171,12 @@ document.getElementById('instructions').value =
         doc.text(1,2, insplit, align = 'left');
 
         doc.setLineWidth(.02);
-        doc.line(1, 7.33, 7.5, 7.33);
-        //var code_pages = ballot_codes.length / codes_pairs_per_page;
-      //  var code_page_remainder = ballot_codes.length % code_pairs_per_page;
-      //  for (var i = 0; i < code_pages; i++){
-        //  doc.addPage();
-        //  doc.text(pw/2,4,i,align='center');
+        doc.line(1, 7.33, (pw-margin), 7.33);
+       // var code_pages = ballot_codes.length / codes_pairs_per_page;
+       // var code_page_remainder = ballot_codes.length % code_pairs_per_page;
+       // for (var i = 0; i < code_pages; i++){
+        // doc.addPage();
+        // doc.text(pw/2,4,i,align='center');
         //}
         doc.text(pw/2, 8, 'BALLOT CODE:', align = 'center');
         doc.text(pw/2, 8.5, ballot_codes[i], align = 'center');
@@ -196,7 +194,7 @@ document.getElementById('instructions').value =
 
         for (k = 0; k < column_array.length; k++){
           doc.setFontSize(12);
-          doc.text(1 + (k+1)*col_width,start_vert - .1, column_array[k], align = 'center')
+          doc.text(margin + (k+.5)*col_width,start_vert - .1, column_array[k], align = 'center')
           }
 
 
@@ -205,28 +203,33 @@ document.getElementById('instructions').value =
         }
 
         doc.setLineWidth(.02);
-        doc.line(1, start_vert, 7.5, start_vert);
+        doc.line(1, start_vert, (pw-margin), start_vert);
 
         for (var j = 0; j < candidate_array.length; j++){
           var row_center = start_vert + (j+.5)*row_height;
           doc.setLineWidth(.02);
-          doc.line(1, row_center + row_height/2, 7.5, row_center + row_height/2);
+          doc.line(1, row_center + row_height/2, (pw-margin), row_center + row_height/2);
           doc.setFontSize(20);
-          doc.text(margin + (column_array.length+2)*col_width, row_center + .06, candidate_array[j]);
+          doc.text(margin + (column_array.length+1)*col_width, row_center + .06, candidate_array[j]);
 
           for (k = 0; k < column_array.length; k++){
-            doc.setFillColor(0,0,0);
-            doc.circle(1 + (k+1)*col_width, row_center, circle_size_ext, 'F');
+            doc.setFillColor(255,150,0);
+            doc.circle(margin + (k+.5)*col_width, row_center, circle_size_ext, 'F');
             doc.setFillColor(255,255,255);
-            doc.circle(1 + (k+1)*col_width, row_center, circle_size_int, 'F');
+            doc.circle(margin + (k+.5)*col_width, row_center, circle_size_int, 'F');
           }
         }
 
-        doc.setLineWidth(.02);
-        doc.line(1, start_vert, 1, start_vert + candidate_array.length*row_height);
-        doc.line(7.5, start_vert, 7.5, start_vert + candidate_array.length*row_height);
+        for (m = 0; m < column_array.length; m++){
+          doc.line(margin+(m+1)*col_width, start_vert, margin+(m+1)*col_width, start_vert + candidate_array.length*row_height);
+        }
 
         doc.setLineWidth(.02);
+        doc.line(margin, start_vert, margin, start_vert + candidate_array.length*row_height);
+        doc.line((pw-margin), start_vert, (pw-margin), start_vert + candidate_array.length*row_height);
+
+        doc.setLineWidth(.02);
+        doc.rect(2.75,9.5,3,.35);
         doc.setFontSize(12);
         doc.text(pw/2, 9.72, ballot_codes[i], align = 'center');
 
@@ -247,10 +250,16 @@ function make_codes(n, code_length){
 }
 
 function single_code(code_length){
+  // Make a single code by stringing together random possible characters.
+  // Separate every 4 characters by ' - ' for readability.
   var text = '';
-  var possible = '0123456789';
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   for (var i = 0; i < code_length; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    if ((i % 4 == 3)&&(i !== code_length-1)) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length)) + ' - ';
+  }else{
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
   return text;
 }
 
