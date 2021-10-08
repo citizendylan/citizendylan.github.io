@@ -1,0 +1,38 @@
+page_number,page_header_text,decision_name,decision_header_text,bubble_column_headers,contestants,contest_header_x,contest_header_y,contest_header_height,contest_width,page_header_x,page_header_y,page_header_height,page_header_width,line_thickness,major_font_size,minor_font_size,row_height,bubble_column_width,bubble_inner_radius,bubble_outer_radius
+,,,,,,,,,,,,,,,,,,,,
+1,Game Night Ballot (1/2),,,,,,,,,4,0.5,1.5,4,0.1,14,11,0.4,0.4,0.15,0.2
+,,What game should we play?,Give each game a score.,"0
+1
+2
+3
+4","CHESS
+CHECKERS
+SETTLERS OF CATAN
+TICKET TO RIDE
+BANANAGRAMS
+MONOPOLY
+TRIVIAL PURSUIT
+CHARADES
+PICTIONARY
+DUNGEONS & DRAGONS",1,3,1,6.5,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+2,Game Night Ballot (2/2),,,,,,,,,4,0.5,1.5,4,0.1,14,11,0.4,0.4,0.15,0.2
+,,What should we eat?,You may vote for multiple candidates.,,"CHINESE
+ITALIAN
+MEXICAN
+FRO-YO",1,5,1,6.5,,,,,,,,,,,
+,,Options,Vote yes or no.,"no
+yes","Play music?
+Same time, next week?",1,6.6,1,6.5,,,,,,,,,,,
+,,Mayor,Rank candidates from 1st to 4th.,"5th
+4th
+3rd
+2nd
+1st","Diamond Joe Quimby
+C Montgomery Burns
+Homer J Simpson
+Marge B Simpson
+Armen Tanzarian
+McBain
+Hans Moleman
+Robert Terwilliger",1,3,1,6.5,,,,,,,,,,,
