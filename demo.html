@@ -117,7 +117,7 @@ document.getElementById('instructions').value =
       var instructions = document.getElementById('instructions').value;
       var n_ballots = document.getElementById('n_ballots').value;
       var rando = document.getElementById('rando').checked;
-      var copyright = "© 2021 Abacus Voting"
+      var copyright = "© 2022 Abacus Voting"
 
       var ballot_codes = make_codes(n_ballots, 16);
       var ownership_codes = make_codes(n_ballots, 16);
@@ -211,7 +211,7 @@ document.getElementById('instructions').value =
           doc.text(margin + (column_array.length+1)*col_width, row_center + .06, candidate_array[j]);
 
           for (k = 0; k < column_array.length; k++){
-            doc.setFillColor(255,150,0);
+            doc.setFillColor(255,255,255);
             doc.circle(margin + (k+.5)*col_width, row_center, circle_size_ext, 'F');
             doc.setFillColor(255,255,255);
             doc.circle(margin + (k+.5)*col_width, row_center, circle_size_int, 'F');
