@@ -211,7 +211,7 @@ document.getElementById('instructions').value =
           doc.text(margin + (column_array.length+1)*col_width, row_center + .06, candidate_array[j]);
 
           for (k = 0; k < column_array.length; k++){
-            doc.setFillColor(255,255,255);
+            doc.setFillColor(0,0,0);
             doc.circle(margin + (k+.5)*col_width, row_center, circle_size_ext, 'F');
             doc.setFillColor(255,255,255);
             doc.circle(margin + (k+.5)*col_width, row_center, circle_size_int, 'F');
